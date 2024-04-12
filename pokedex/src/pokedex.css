@@ -1,0 +1,11 @@
+.top-header {
+    display: flex;
+    justify-content: center;
+    background: yellow;
+}
+
+.top-header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
