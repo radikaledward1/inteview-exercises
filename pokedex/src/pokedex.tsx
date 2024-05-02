@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './pokedex.css';
+import Grid from './components/grid';
 
 interface Type {
     name: string;
@@ -24,6 +25,15 @@ export default function Pokedex(){
     //Types Select Inline Component
     const TypesSelector = ({types, getPokemonsByType}: PokemonProps) => {
 
+        const menu = {
+            display: 'flex',
+            marginTop: '10px',
+            marginBottom: '10px',
+            selector: {
+                marginRight: '10px',
+            },
+        }
+
         const setPokemonType = (e: React.ChangeEvent<HTMLSelectElement>) => {
             let valueType = e.target.value;
             setTypeSelected(valueType);
@@ -33,13 +43,16 @@ export default function Pokedex(){
         }
 
         return (
-            <select value={typeSelected} onChange={(e) => {setPokemonType(e)}}>
-                {
-                    types.map((type, index) => {
-                        return <option key={index} value={type.url}>{type.name}</option>
-                    })
-                }
-            </select>
+            <div style={menu}>
+                <select value={typeSelected} onChange={(e) => {setPokemonType(e)}} style={menu.selector}>
+                    {
+                        types.map((type, index) => {
+                            return <option key={index} value={type.url}>{type.name}</option>
+                        })
+                    }
+                </select>
+                <label>My Pokedex</label>
+            </div>
         )
     }
 
@@ -102,15 +115,10 @@ export default function Pokedex(){
                     <h1>Pokedex</h1>
                     <label>Select the Pokemon Type</label>
                     <TypesSelector types={types} getPokemonsByType={getPokemonsByType}/>
-                    <button onClick={() => {checkCurrentPokemons()}}>Console</button>
+                    {/* <button onClick={() => {checkCurrentPokemons()}}>Console</button> */}
                 </div>
             </div>
-            <div className='pokedex-grid'>
-                <div className='container'>
-                    <div>Prueba</div>
-                    <div>Prueba</div>
-                </div>
-            </div>
+            <Grid pokemons={pokemons}/>
         </>
     )
 }
