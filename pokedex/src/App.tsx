@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Layout from './components/layout';
+import Pokedex from './components/pokedex';
+import MyPokedex from './components/mypokedex';
 
 function App() {
+
+  // const routes = [
+  //     {
+  //         path: '/',
+  //         component: <Main />
+  //     }
+  // ]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Pokedex />} />
+            <Route path='/mypokedex' element={<MyPokedex />} />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
